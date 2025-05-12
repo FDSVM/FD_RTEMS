@@ -69,7 +69,7 @@ jobs:
     #   uses: actions/setup-example@v1
 
     # Initializes the CodeQL tools for scanning.
-    - name: Jonas Initialize CodeQL WAF5
+    - name: Jonas Initialize CodeQL WAF 6
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
@@ -81,17 +81,18 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    # If the analyze step fails for one of the languages you are analyzing with
-    # "We were unable to automatically build your code", modify the matrix above
-    # to set the build mode to "manual" for that language. Then modify this step
-    # to build your code.
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+    - name: Setup RTEMS Environment
+      run: |
+        echo "Setting up RTEMS environment variables."
+        export RTEMS_TOP_GROUP=/grp  # Update this path if needed
+        export PATH=/opt/rtems/bin:$PATH  # Include RTEMS tools in PATH
+        echo "RTEMS environment setup complete."
+
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        echo "Setting up RTEMS environment."
-        ./waf configure --board=sitl --rtems-top-group=/grp
+        echo "Configuring RTEMS with waf."
+        ./waf configure --board=sitl --rtems-top-group=$RTEMS_TOP_GROUP
         ./waf build
 
     - name: Jonas Perform CodeQL Analysis
