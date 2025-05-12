@@ -69,7 +69,7 @@ jobs:
     #   uses: actions/setup-example@v1
 
     # Initializes the CodeQL tools for scanning.
-    - name: Jonas Initialize CodeQL WAF 6
+    - name: Jonas Initialize CodeQL WAF 7
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
@@ -81,12 +81,6 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: Setup RTEMS Environment
-      run: |
-        echo "Setting up RTEMS environment variables."
-        export RTEMS_TOP_GROUP=/grp  # Update this path if needed
-        export PATH=/opt/rtems/bin:$PATH  # Include RTEMS tools in PATH
-        echo "RTEMS environment setup complete."
 
     - if: matrix.build-mode == 'manual'
       shell: bash
