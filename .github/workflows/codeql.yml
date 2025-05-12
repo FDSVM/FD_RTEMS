@@ -69,7 +69,7 @@ jobs:
     #   uses: actions/setup-example@v1
 
     # Initializes the CodeQL tools for scanning.
-    - name: Jonas Initialize CodeQL WAF 7
+    - name: Jonas Initialize CodeQL WAF 8
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
@@ -86,7 +86,7 @@ jobs:
       shell: bash
       run: |
         echo "Configuring RTEMS with waf."
-        ./waf configure --board=sitl --rtems-top-group=$RTEMS_TOP_GROUP
+        ./waf configure --board=sitl 
         ./waf build
 
     - name: Jonas Perform CodeQL Analysis
