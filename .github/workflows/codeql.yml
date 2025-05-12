@@ -90,8 +90,8 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        echo "Skipping install-prereqs-ubuntu.sh as it is missing."
-        ./waf configure --board sitl
+        echo "Setting up RTEMS environment."
+        ./waf configure --board=sitl --rtems-top-group=/grp
         ./waf build
 
     - name: Jonas Perform CodeQL Analysis
