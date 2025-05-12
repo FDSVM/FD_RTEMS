@@ -69,7 +69,7 @@ jobs:
     #   uses: actions/setup-example@v1
 
     # Initializes the CodeQL tools for scanning.
-    - name: Jonas Initialize CodeQL WAF 9
+    - name: Jonas Initialize CodeQL WAF 10
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
@@ -86,8 +86,8 @@ jobs:
       shell: bash
       run: |
         git submodule update --init --recursive
-        ./waf configure --board sitl
-        ./waf build
+        python3 ./waf configure --board sitl
+        python3 ./waf build
 
     - name: Jonas Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
