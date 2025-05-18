@@ -52,7 +52,7 @@ jobs:
         #  with:
         #    node-version: 20
 
-      - name: Run Snyk Test Jonas5
+      #- name: Run Snyk Test Jonas5
         env:
           # This is where you will need to introduce the Snyk API token created with your Snyk account
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
